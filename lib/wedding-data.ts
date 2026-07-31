@@ -57,14 +57,9 @@ export const wedding = {
     },
   ],
   gallery: [
-    'https://images.pexels.com/photos/313707/pexels-photo-313707.jpeg?auto=compress&cs=tinysrgb&w=900',
-    'https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=900',
-    'https://images.pexels.com/photos/1779415/pexels-photo-1779415.jpeg?auto=compress&cs=tinysrgb&w=900',
-    'https://images.pexels.com/photos/1024998/pexels-photo-1024998.jpeg?auto=compress&cs=tinysrgb&w=900',
-    'https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=900',
-    'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=900',
-    'https://images.pexels.com/photos/1456613/pexels-photo-1456613.jpeg?auto=compress&cs=tinysrgb&w=900',
-    'https://images.pexels.com/photos/2253842/pexels-photo-2253842.jpeg?auto=compress&cs=tinysrgb&w=900',
+    '/images/gallery/wedding-portrait.jpeg',
+    '/images/gallery/wedding-standing.png',
+    '/images/gallery/wedding-beach.png',
   ],
   message:
     'With immense joy and happiness, we warmly invite you to join us as we celebrate the wedding of our beloved couple.',

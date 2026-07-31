@@ -19,6 +19,7 @@ export default function MusicControl({ start }: Props) {
       );
       audio.loop = true;
       audio.volume = 0.35;
+      audio.preload = 'auto';
       audioRef.current = audio;
     }
   }, []);
@@ -33,6 +34,12 @@ export default function MusicControl({ start }: Props) {
         .catch(() => setPlaying(false));
     }
   }, [start]);
+
+  useEffect(() => {
+    return () => {
+      audioRef.current?.pause();
+    };
+  }, []);
 
   const toggle = () => {
     const audio = audioRef.current;
@@ -50,20 +57,6 @@ export default function MusicControl({ start }: Props) {
 
   return (
     <>
-      {/* Dark overlay while music plays */}
-      <AnimatePresence>
-        {playing && (
-          <motion.div
-            className="fixed inset-0 z-[60] pointer-events-none"
-            style={{ background: 'rgba(20, 8, 12, 0.18)' }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-          />
-        )}
-      </AnimatePresence>
-
       <motion.button
         onClick={toggle}
         className="fixed bottom-5 right-5 z-[90] w-12 h-12 rounded-full flex items-center justify-center text-ivory"

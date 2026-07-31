@@ -67,6 +67,7 @@ export default function FloralCorner({ className = '', flip = false }: Props) {
         <circle cx="208" cy="20" r="1.6" fill="#d94a3f" />
       </g>
 
+
       {/* Tiny accent leaves */}
       <g fill="#6b9147" fillOpacity="0.5" stroke="#5a7d3a" strokeWidth="0.6">
         <path d="M30 200 C 26 196, 24 190, 28 186 C 34 190, 36 196, 30 200 Z" />

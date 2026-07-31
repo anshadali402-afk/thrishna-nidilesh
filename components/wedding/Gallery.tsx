@@ -18,14 +18,14 @@ export default function Gallery({ images }: Props) {
           <motion.button
             key={i}
             onClick={() => setActive(i)}
-            className="relative overflow-hidden rounded-lg group"
+            className={`relative overflow-hidden rounded-xl group border border-gold/30 bg-ivory shadow-lg ${i === 0 ? 'col-span-2 sm:col-span-1' : ''}`}
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: (i % 6) * 0.08 }}
+            transition={{ duration: 0.7, delay: i * 0.14, ease: [0.22, 1, 0.36, 1] }}
             whileHover={{ scale: 1.03 }}
           >
-            <div className="aspect-[3/4] overflow-hidden rounded-lg">
+            <div className="aspect-[3/4] overflow-hidden rounded-xl">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={src}
@@ -33,8 +33,11 @@ export default function Gallery({ images }: Props) {
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
             </div>
-            <div className="absolute inset-0 bg-burgundy-deep/0 group-hover:bg-burgundy-deep/20 transition-colors duration-500 rounded-lg" />
-            <div className="absolute inset-2 border border-gold/0 group-hover:border-gold/50 transition-all duration-500 rounded-md" />
+            <div className="absolute inset-0 bg-gradient-to-t from-burgundy-deep/45 via-transparent to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-90" />
+            <div className="absolute inset-2 border border-gold/30 transition-all duration-500 group-hover:border-gold/90 rounded-lg" />
+            <span className="absolute bottom-4 left-0 right-0 font-cinzel text-[10px] tracking-[0.22em] uppercase text-gold-light opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+              Our Story
+            </span>
           </motion.button>
         ))}
       </div>

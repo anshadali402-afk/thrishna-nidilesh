@@ -73,6 +73,9 @@ body {
 .font-playfair {
   font-family: var(--font-playfair), serif;
 }
+.font-cinzel {
+  font-family: var(--font-cinzel), serif;
+}
 .font-poppins {
   font-family: var(--font-poppins), sans-serif;
 }

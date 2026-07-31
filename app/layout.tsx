@@ -1,6 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Great_Vibes, Cormorant_Garamond, Playfair_Display, Poppins } from 'next/font/google';
+import { Great_Vibes, Cormorant_Garamond, Playfair_Display, Poppins, Cinzel } from 'next/font/google';
 
 const greatVibes = Great_Vibes({
   weight: '400',
@@ -30,12 +30,19 @@ const poppins = Poppins({
   display: 'swap',
 });
 
+const cinzel = Cinzel({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+  variable: '--font-cinzel',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
-  title: 'Aarav & Meera · Wedding Invitation',
-  description: 'With divine grace and the blessings of our elders, we invite you to celebrate the wedding of Aarav & Meera.',
+  title: 'Thrishna & Nidilesh · Wedding Invitation',
+  description: 'With divine grace and the blessings of our elders, we invite you to celebrate the wedding of Thrishna & Nidilesh.',
   openGraph: {
-    title: 'Aarav & Meera · Wedding Invitation',
-    description: 'With divine grace and the blessings of our elders, we invite you to celebrate the wedding of Aarav & Meera.',
+    title: 'Thrishna & Nidilesh · Wedding Invitation',
+    description: 'With divine grace and the blessings of our elders, we invite you to celebrate the wedding of Thrishna & Nidilesh.',
     images: [
       {
         url: 'https://bolt.new/static/og_default.png',
@@ -58,8 +65,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${greatVibes.variable} ${cormorant.variable} ${playfair.variable} ${poppins.variable}`}>
-      <body className="font-poppins bg-cream text-dark-brown antialiased">
+    <html lang="en" className={`${greatVibes.variable} ${cormorant.variable} ${playfair.variable} ${poppins.variable} ${cinzel.variable}`}>
+      <body className="font-cormorant bg-cream text-dark-brown antialiased">
         {children}
       </body>
     </html>

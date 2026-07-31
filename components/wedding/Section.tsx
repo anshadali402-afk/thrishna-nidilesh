@@ -36,7 +36,7 @@ export function SectionTitle({
     <div className={`text-center ${className}`}>
       {kicker && (
         <motion.p
-          className="font-cormorant text-sm uppercase tracking-[0.4em] text-gold mb-3"
+          className="font-cinzel text-xs uppercase tracking-[0.32em] text-gold mb-3"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -45,7 +45,7 @@ export function SectionTitle({
           {kicker}
         </motion.p>
       )}
-      <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl text-burgundy font-semibold">
+      <h2 className="font-cinzel text-2xl sm:text-3xl md:text-4xl text-burgundy font-semibold tracking-[0.04em]">
         {title}
       </h2>
       <div className="gold-divider mt-5 max-w-xs mx-auto">

@@ -15,10 +15,7 @@ import {
 } from 'lucide-react';
 import { wedding } from '@/lib/wedding-data';
 import EnvelopeIntro from '@/components/wedding/EnvelopeIntro';
-import MusicControl from '@/components/wedding/MusicControl';
 import Petals from '@/components/wedding/Petals';
-import FloralCorner from '@/components/wedding/FloralCorner';
-import Ganesha from '@/components/wedding/Ganesha';
 import Section, { SectionTitle } from '@/components/wedding/Section';
 import Countdown from '@/components/wedding/Countdown';
 import Gallery from '@/components/wedding/Gallery';
@@ -34,6 +31,14 @@ export default function Home() {
     const t = setTimeout(() => setLoading(false), 1600);
     return () => clearTimeout(t);
   }, []);
+
+  useEffect(() => {
+    // Always reveal the invitation from its true beginning, even if the
+    // visitor refreshed the page after scrolling or their browser restored it.
+    if (opened) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+    }
+  }, [opened]);
 
   const waLink = `https://wa.me/${wedding.whatsapp}?text=${encodeURIComponent(
     `Hi! I'm confirming my attendance for ${wedding.hashtag} on ${wedding.dateLabel}.`
@@ -70,11 +75,10 @@ export default function Home() {
       {/* Envelope intro */}
       <EnvelopeIntro onOpen={() => setOpened(true)} />
 
-      {/* Music + petals once opened */}
+      {/* Petals once opened */}
       {opened && (
         <>
-          <MusicControl start={opened} />
-          <Petals count={20} />
+          <Petals count={16} />
         </>
       )}
 
@@ -87,10 +91,6 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2, delay: 0.3 }}
           >
-            {/* Floral corners (fixed decorative) */}
-            <FloralCorner className="fixed top-0 right-0 w-44 h-44 sm:w-64 sm:h-64 pointer-events-none z-10 opacity-80" />
-            <FloralCorner className="fixed bottom-0 left-0 w-44 h-44 sm:w-64 sm:h-64 pointer-events-none z-10 opacity-80" flip />
-
             {/* 1. Welcome / Hero */}
             <Section id="welcome" className="pt-24 sm:pt-32 text-center">
               <motion.div
@@ -99,7 +99,6 @@ export default function Home() {
                 transition={{ duration: 1, delay: 0.5 }}
                 className="flex flex-col items-center"
               >
-                <Ganesha className="w-20 h-20 mb-5 gentle-float" />
                 <p className="font-cormorant text-gold text-sm tracking-[0.4em] uppercase mb-4">
                   The Wedding Of
                 </p>
@@ -249,13 +248,15 @@ export default function Home() {
               </motion.div>
             </Section>
 
-            {/* 10. Gallery */}
-            <Section id="gallery">
-              <SectionTitle kicker="Cherished Moments" title="Gallery" />
-              <div className="mt-10">
-                <Gallery images={wedding.gallery} />
-              </div>
-            </Section>
+            {/* A personal gallery is shown only after the couple's photographs are added. */}
+            {wedding.gallery.length > 0 && (
+              <Section id="gallery">
+                <SectionTitle kicker="Cherished Moments" title="Gallery" />
+                <div className="mt-10">
+                  <Gallery images={wedding.gallery} />
+                </div>
+              </Section>
+            )}
 
             {/* 11. Schedule */}
             <Section id="schedule">
@@ -368,31 +369,35 @@ export default function Home() {
             </Section>
 
             {/* 15. Thank You */}
-            <Section id="thankyou" className="pb-32">
+            <Section id="thankyou" className="pb-32 pt-8">
               <motion.div
-                className="text-center max-w-xl mx-auto"
+                className="relative mx-auto max-w-3xl overflow-hidden rounded-[2rem] border border-gold/50 bg-burgundy-deep px-7 py-10 text-center shadow-2xl sm:px-14 sm:py-14"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1 }}
               >
-                <div
-                  className="w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-6 gentle-float"
-                  style={{ background: 'linear-gradient(135deg, #6b1f2a, #4a141d)', border: '1px solid #c9a55a' }}
-                >
-                  <span className="font-vibes text-3xl text-gold-light">T&amp;N</span>
+                <div className="pointer-events-none absolute inset-3 rounded-[1.5rem] border border-gold/25" />
+                <div className="relative mx-auto mb-7 w-36 overflow-hidden rounded-full border-4 border-gold/60 shadow-xl sm:w-44">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/gallery/wedding-standing.png"
+                    alt="Thrishna and Nidilesh"
+                    className="aspect-square w-full object-cover object-center"
+                  />
                 </div>
-                <h2 className="font-vibes text-5xl sm:text-6xl text-burgundy mb-4">Thank You</h2>
-                <p className="font-cormorant text-dark-brown/80 text-lg sm:text-xl italic leading-relaxed">
+                <p className="relative font-cinzel text-[10px] uppercase tracking-[0.3em] text-gold-light">With gratitude</p>
+                <h2 className="relative font-vibes text-6xl sm:text-7xl text-ivory mb-4">Thank You</h2>
+                <p className="relative font-cormorant text-ivory/85 text-lg sm:text-xl italic leading-relaxed">
                   For being a part of our story. Your blessings and presence are the greatest gifts we could receive as we begin this beautiful journey together.
                 </p>
                 <div className="gold-divider mt-8 max-w-xs mx-auto">
                   <span className="text-gold text-lg">❦</span>
                 </div>
-                <p className="font-vibes text-3xl text-burgundy mt-6">
+                <p className="relative font-vibes text-4xl text-gold-light mt-6">
                   {wedding.bride.name} &amp; {wedding.groom.name}
                 </p>
-                <p className="font-cormorant text-gold text-xs tracking-[0.3em] uppercase mt-2">
+                <p className="relative font-cinzel text-gold text-[10px] tracking-[0.25em] uppercase mt-2">
                   #{wedding.hashtag}
                 </p>
               </motion.div>

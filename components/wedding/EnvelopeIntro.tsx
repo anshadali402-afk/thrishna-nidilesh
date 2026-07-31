@@ -1,91 +1,78 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
-import Ganesha from './Ganesha';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
-type Props = {
-  onOpen: () => void;
-};
+type Props = { onOpen: () => void };
 
 export default function EnvelopeIntro({ onOpen }: Props) {
   const [opening, setOpening] = useState(false);
   const [done, setDone] = useState(false);
 
+  useEffect(() => {
+    document.body.style.overflow = done ? '' : 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, [done]);
+
   const handleOpen = () => {
     if (opening) return;
     setOpening(true);
-    setTimeout(() => {
-      setDone(true);
-      onOpen();
-    }, 800);
+    // Start the invitation while this tap still counts as a user gesture.
+    // That lets the background music play reliably in modern browsers.
+    onOpen();
+    window.setTimeout(() => setDone(true), 850);
   };
 
   return (
     <AnimatePresence>
       {!done && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center px-6"
-          style={{ background: 'radial-gradient(circle at 50% 40%, #4a141d 0%, #2a0c12 70%, #1a0609 100%)' }}
-          initial={{ opacity: 1 }}
-          animate={{ opacity: opening ? 0 : 1 }}
-          transition={{ duration: 0.8 }}
+          className="fixed inset-0 z-[100] flex min-h-[100dvh] items-center justify-center overflow-hidden px-5 py-7 sm:px-8"
+          style={{ background: 'radial-gradient(circle at 50% 35%, #6b1f2a 0%, #320b13 54%, #180407 100%)' }}
+          animate={{ opacity: opening ? 0 : 1, scale: opening ? 1.04 : 1 }}
+          transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
         >
           <motion.div
-            className="flex flex-col items-center text-center max-w-sm"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9 }}
+            className="relative w-full max-w-4xl overflow-hidden rounded-[2rem] border border-gold/60 bg-ivory shadow-2xl"
+            initial={{ opacity: 0, y: 28, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
-            <Ganesha className="w-16 h-16 mb-3 gentle-float" />
-            <p className="font-cormorant text-gold-light tracking-[0.4em] uppercase text-xs sm:text-sm mb-6">
-              With Divine Blessings
-            </p>
+            <div className="pointer-events-none absolute inset-3 z-10 rounded-[1.5rem] border border-gold/30" />
+            <div className="grid md:grid-cols-[0.85fr_1.15fr]">
+              <motion.div
+                className="relative min-h-[240px] overflow-hidden md:min-h-[550px]"
+                initial={{ clipPath: 'inset(0 0 100% 0)' }}
+                animate={{ clipPath: 'inset(0 0 0% 0)' }}
+                transition={{ duration: 1.15, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/images/gallery/wedding-portrait.jpeg" alt="Thrishna and Nidilesh" className="h-full w-full object-cover object-center" />
+                <div className="absolute inset-0 bg-gradient-to-t from-burgundy-deep/60 via-transparent to-transparent" />
+                <p className="absolute bottom-7 left-0 right-0 font-cinzel text-[10px] tracking-[0.28em] uppercase text-gold-light">A new beginning</p>
+              </motion.div>
 
-            <p className="font-cormorant text-gold text-[10px] tracking-[0.3em] uppercase mb-3">
-              Wedding Invitation
-            </p>
-            <p className="font-vibes text-4xl sm:text-5xl text-gold-light leading-tight">
-              Thrishna
-            </p>
-            <p className="font-cormorant text-gold text-lg italic my-1">weds</p>
-            <p className="font-vibes text-4xl sm:text-5xl text-gold-light leading-tight">
-              Nidilesh
-            </p>
-
-            <div className="gold-divider my-5 max-w-[160px] mx-auto">
-              <span className="text-gold text-xs">✦</span>
+              <div className="relative flex flex-col items-center justify-center px-7 py-8 text-center sm:px-12 md:py-12">
+                <p className="font-cinzel text-[10px] tracking-[0.3em] uppercase text-gold sm:text-xs">With divine blessings</p>
+                <div className="gold-divider my-5 w-full max-w-[180px]"><span className="text-gold text-xs">✦</span></div>
+                <p className="font-cinzel text-[10px] tracking-[0.26em] uppercase text-burgundy/70">Wedding invitation</p>
+                <h1 className="font-vibes mt-2 text-5xl leading-none text-burgundy sm:text-6xl">Thrishna</h1>
+                <p className="font-cormorant my-1 text-xl italic text-gold">weds</p>
+                <h1 className="font-vibes text-5xl leading-none text-burgundy sm:text-6xl">Nidilesh</h1>
+                <p className="mt-6 font-playfair text-base text-dark-brown sm:text-lg">Sunday, 30th August 2026</p>
+                <p className="mt-1 font-cinzel text-[10px] tracking-[0.18em] uppercase text-gold">1202 Chingam 14</p>
+                <p className="mt-3 font-cormorant text-sm italic text-dark-brown/70">Muhoortham · 09:30 AM – 10:05 AM</p>
+                <p className="mt-1 font-cormorant text-sm text-dark-brown/60">Le Grande Auditorium, Karathode</p>
+                <motion.button
+                  onClick={handleOpen}
+                  className="pulse-ring relative mt-8 rounded-full px-8 py-3 font-cinzel text-xs tracking-[0.2em] uppercase text-ivory"
+                  style={{ background: 'linear-gradient(135deg, #6b1f2a 0%, #4a141d 100%)', border: '1px solid #c9a55a', boxShadow: '0 8px 24px rgba(107,31,42,0.28)' }}
+                  whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
+                >
+                  {opening ? 'Opening...' : 'Open Invitation'}
+                </motion.button>
+              </div>
             </div>
-
-            <p className="font-cormorant text-ivory/80 text-sm leading-relaxed">
-              Sunday, 30th August 2026
-            </p>
-            <p className="font-cormorant text-gold text-xs tracking-[0.2em] uppercase mt-1">
-              1202 Chingam 14
-            </p>
-            <p className="font-cormorant text-ivory/70 text-xs mt-2 italic">
-              Muhoortham: 09:30 AM – 10:05 AM
-            </p>
-            <p className="font-cormorant text-ivory/60 text-xs mt-3 leading-relaxed">
-              Le Grande Auditorium, Karathode
-            </p>
-
-            <motion.button
-              onClick={handleOpen}
-              className="mt-10 px-10 py-3 rounded-full font-cormorant text-base tracking-[0.25em] uppercase text-ivory"
-              style={{
-                background: 'linear-gradient(135deg, #6b1f2a 0%, #4a141d 100%)',
-                border: '1px solid #c9a55a',
-                boxShadow: '0 8px 24px rgba(107,31,42,0.4)',
-              }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.96 }}
-            >
-              Open Invitation
-            </motion.button>
           </motion.div>
         </motion.div>
       )}
