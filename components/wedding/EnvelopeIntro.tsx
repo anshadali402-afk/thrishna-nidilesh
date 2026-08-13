@@ -41,15 +41,20 @@ export default function EnvelopeIntro({ onOpen }: Props) {
             <div className="pointer-events-none absolute inset-3 z-10 rounded-[1.5rem] border border-gold/30" />
             <div className="grid md:grid-cols-[0.85fr_1.15fr]">
               <motion.div
-                className="relative h-[27dvh] min-h-[180px] max-h-[250px] overflow-hidden md:h-auto md:min-h-[550px] md:max-h-none"
+                className="relative h-[38dvh] min-h-[280px] max-h-[360px] overflow-hidden md:h-auto md:min-h-[550px] md:max-h-none"
                 initial={{ clipPath: 'inset(0 0 100% 0)' }}
                 animate={{ clipPath: 'inset(0 0 0% 0)' }}
                 transition={{ duration: 1.15, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/images/gallery/wedding-portrait.jpeg" alt="Thrishna and Nidilesh" className="h-full w-full object-cover object-top" />
+                <img
+                  src="/images/gallery/wedding-portrait.jpeg"
+                  alt="Thrishna and Nidilesh"
+                  className="h-full w-full object-cover"
+                  style={{ objectPosition: '50% 10%' }}
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-burgundy-deep/60 via-transparent to-transparent" />
-                <p className="absolute bottom-7 left-0 right-0 font-cinzel text-[10px] tracking-[0.28em] uppercase text-gold-light">A new beginning</p>
+                <p className="absolute bottom-5 left-0 right-0 font-cinzel text-[10px] tracking-[0.28em] uppercase text-gold-light">A new beginning</p>
               </motion.div>
 
               <div className="relative flex flex-col items-center justify-center px-7 py-5 text-center sm:px-12 sm:py-8 md:py-12">
