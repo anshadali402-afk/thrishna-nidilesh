@@ -21,6 +21,7 @@ import Countdown from '@/components/wedding/Countdown';
 import Gallery from '@/components/wedding/Gallery';
 import QRCode from '@/components/wedding/QRCode';
 import ShareBar from '@/components/wedding/ShareBar';
+import MusicControl from '@/components/wedding/MusicControl';
 
 export default function Home() {
   const [opened, setOpened] = useState(false);
@@ -115,6 +116,14 @@ export default function Home() {
                 <p className="font-cormorant text-dark-brown/80 text-lg sm:text-xl mt-6 italic max-w-md">
                   With immense joy and the blessings of our elders, we invite you to celebrate our union.
                 </p>
+                <div className="invitation-photo-frame mt-10 w-full max-w-[340px]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/gallery/wedding-standing.png"
+                    alt="Thrishna and Nidilesh"
+                    className="invitation-photo"
+                  />
+                </div>
               </motion.div>
             </Section>
 
@@ -405,6 +414,7 @@ export default function Home() {
           </motion.main>
         )}
       </AnimatePresence>
+      <MusicControl start={opened} />
     </>
   );
 }

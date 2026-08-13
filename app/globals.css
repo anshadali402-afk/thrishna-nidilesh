@@ -65,7 +65,9 @@ body {
 }
 
 .font-vibes {
-  font-family: var(--font-great-vibes), cursive;
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+  letter-spacing: -0.035em;
 }
 .font-cormorant {
   font-family: var(--font-cormorant), serif;
@@ -126,6 +128,25 @@ body {
   background: linear-gradient(180deg, var(--ivory) 0%, #fdf8f3 100%);
   border: 1px solid rgba(201, 165, 90, 0.3);
   box-shadow: 0 20px 60px -20px rgba(107, 31, 42, 0.18);
+}
+
+/* Portrait invitation photo: preserve every edge of the supplied card. */
+.invitation-photo-frame {
+  padding: 0.55rem;
+  border: 1px solid rgba(201, 165, 90, 0.72);
+  border-radius: 1.5rem;
+  background: linear-gradient(145deg, #fffdf9 0%, #ead6aa 50%, #fffdf9 100%);
+  box-shadow: 0 24px 52px -24px rgba(74, 20, 29, 0.48);
+}
+
+.invitation-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 590px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 1rem;
 }
 
 /* Petal float */
