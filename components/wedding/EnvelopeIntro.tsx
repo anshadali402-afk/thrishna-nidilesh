@@ -47,7 +47,7 @@ export default function EnvelopeIntro({ onOpen }: Props) {
                 transition={{ duration: 1.15, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/images/gallery/wedding-portrait.jpeg" alt="Thrishna and Nidilesh" className="h-full w-full object-cover object-center" />
+                <img src="/images/gallery/wedding-portrait.jpeg" alt="Thrishna and Nidilesh" className="h-full w-full object-cover object-top" />
                 <div className="absolute inset-0 bg-gradient-to-t from-burgundy-deep/60 via-transparent to-transparent" />
                 <p className="absolute bottom-7 left-0 right-0 font-cinzel text-[10px] tracking-[0.28em] uppercase text-gold-light">A new beginning</p>
               </motion.div>
