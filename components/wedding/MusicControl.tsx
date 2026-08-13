@@ -8,7 +8,8 @@ type Props = {
   start: boolean;
 };
 
-const melody = [261.63, 329.63, 392, 329.63, 293.66, 261.63];
+// A slow, warm D-major phrase for a calm background ambience.
+const melody = [220, 293.66, 369.99, 293.66];
 type AudioWindow = Window & typeof globalThis & { webkitAudioContext?: typeof AudioContext };
 
 export default function MusicControl({ start }: Props) {
@@ -31,17 +32,17 @@ export default function MusicControl({ start }: Props) {
     melody.forEach((frequency, index) => {
       const oscillator = context.createOscillator();
       const gain = context.createGain();
-      const time = now + index * 0.58;
+      const time = now + index * 1.35;
 
       oscillator.type = 'sine';
       oscillator.frequency.setValueAtTime(frequency, time);
       gain.gain.setValueAtTime(0.0001, time);
-      gain.gain.exponentialRampToValueAtTime(0.045, time + 0.05);
-      gain.gain.exponentialRampToValueAtTime(0.0001, time + 0.52);
+      gain.gain.exponentialRampToValueAtTime(0.025, time + 0.3);
+      gain.gain.exponentialRampToValueAtTime(0.0001, time + 1.25);
 
       oscillator.connect(gain).connect(context.destination);
       oscillator.start(time);
-      oscillator.stop(time + 0.56);
+      oscillator.stop(time + 1.3);
     });
   }, []);
 
@@ -54,7 +55,7 @@ export default function MusicControl({ start }: Props) {
     contextRef.current = context;
     await context.resume();
     playPhrase(context);
-    timerRef.current = window.setInterval(() => playPhrase(context), 3600);
+    timerRef.current = window.setInterval(() => playPhrase(context), 5600);
     setPlaying(true);
   }, [playPhrase]);
 
