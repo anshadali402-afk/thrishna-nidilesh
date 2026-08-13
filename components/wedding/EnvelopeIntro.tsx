@@ -40,9 +40,9 @@ export default function EnvelopeIntro({ onOpen }: Props) {
           >
             <div className="pointer-events-none absolute inset-3 z-10 rounded-[1.5rem] border border-gold/30 hidden md:block" />
             <div className="grid md:grid-cols-[0.9fr_1.1fr]">
-              {/* Full Size Photo Container */}
+              {/* Half Size Photo Container */}
               <motion.div
-                className="relative w-full h-[52dvh] min-h-[380px] max-h-[500px] md:h-auto md:min-h-[560px] md:max-h-none overflow-hidden bg-burgundy-deep/20"
+                className="relative w-full h-[40dvh] min-h-[260px] max-h-[340px] md:h-auto md:min-h-[560px] md:max-h-none overflow-hidden bg-burgundy-deep/20"
                 initial={{ clipPath: 'inset(0 0 100% 0)' }}
                 animate={{ clipPath: 'inset(0 0 0% 0)' }}
                 transition={{ duration: 1.15, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
@@ -51,10 +51,11 @@ export default function EnvelopeIntro({ onOpen }: Props) {
                 <img
                   src="/images/gallery/wedding-portrait.jpeg"
                   alt="Thrishna and Nidilesh"
-                  className="h-full w-full object-cover object-top"
+                  className="h-full w-full object-cover"
+                  style={{ objectPosition: '50% 12%' }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-burgundy-deep/70 via-transparent to-transparent" />
-                <p className="absolute bottom-4 left-0 right-0 text-center font-cinzel text-[10px] sm:text-xs tracking-[0.28em] uppercase text-gold-light drop-shadow">
+                <p className="absolute bottom-3 left-0 right-0 text-center font-cinzel text-[10px] sm:text-xs tracking-[0.28em] uppercase text-gold-light drop-shadow">
                   A new beginning
                 </p>
               </motion.div>
